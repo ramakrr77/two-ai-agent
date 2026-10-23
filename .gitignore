@@ -1,0 +1,19 @@
+target/
+*.class
+*.log
+
+# IDEs
+.idea/
+*.iml
+.vscode/
+.classpath
+.project
+.settings/
+
+# Secrets
+.env
+application-local.yml
+
+# OS
+.DS_Store
+Thumbs.db

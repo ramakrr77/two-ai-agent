@@ -1,0 +1,36 @@
+spring:
+  application:
+    name: two-key-ai-agent
+  ai:
+    # Only the chat model is used; switch the other OpenAI model types off.
+    model:
+      embedding: none
+      image: none
+      moderation: none
+      audio:
+        speech: none
+        transcription: none
+    openai:
+      # Needed only in "llm" mode. Never commit a real key; set OPENAI_API_KEY instead.
+      api-key: ${OPENAI_API_KEY:not-set}
+      chat:
+        options:
+          model: ${OPENAI_MODEL:gpt-4o-mini}
+          temperature: 0.1
+
+twokey:
+  agent:
+    # offline = built-in demo planner (no API key needed)
+    # llm     = a real LLM plans the steps through Spring AI tool calling
+    mode: ${TWOKEY_AGENT_MODE:offline}
+  policy:
+    # Refunds above this amount need a human approval (the extra key).
+    auto-refund-limit: 200.00
+    # Two identical charges on the same order within this window count as a duplicate.
+    duplicate-window: 10m
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
